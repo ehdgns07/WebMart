@@ -1,18 +1,16 @@
 package com.nhnacademy.web;
 
+import static java.lang.Thread.sleep;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Foodstable extends HttpServlet {
+public class FoodStand extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -32,6 +30,9 @@ public class Foodstable extends HttpServlet {
                 goodsMap.get("greenOnion").getPrice());
             out.println("이름 : 사과 갯수 : " + goodsMap.get("apple").getNumber() + " 가격 : " +
                 goodsMap.get("apple").getPrice());
+            out.println("\n 구매화면 : /foodStand.html");
         }
+
     }
+
 }

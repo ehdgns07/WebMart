@@ -13,7 +13,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Foodstable</servlet-name>
-        <servlet-class>com.nhnacademy.web.Foodstable</servlet-class>
+        <servlet-class>com.nhnacademy.web.FoodStand</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Foodstable</servlet-name>
@@ -44,4 +44,8 @@
         <param-name>apple</param-name>
         <param-value>20,2000</param-value>
     </context-param>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

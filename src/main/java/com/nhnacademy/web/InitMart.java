@@ -43,7 +43,7 @@ public class InitMart extends HttpServlet {
 
         getServletContext().setAttribute("goodsList", goodsMap);
 
-        resp.sendRedirect("/foods");
+        resp.sendRedirect("/init.html");
 
         try (PrintWriter out = resp.getWriter()) {
             out.println(getServletContext().getAttribute("goodsList").toString());
