@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@WebServlet(name="cart", urlPatterns = "/cart")
 public class Cart extends HttpServlet {
     int numberOfOnion;
     int numberOfEgg;
     int numberOfGreenOnion;
     int numberOfApple;
+    Map<String, Goods> goodsMap;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
-        Map<String, Goods> goodsMap;
         goodsMap = (Map<String, Goods>) getServletContext().getAttribute("goodsList");
 
         String onionNumber = req.getParameter("onionnumber");
@@ -61,15 +62,15 @@ public class Cart extends HttpServlet {
         throws ServletException, IOException {
 
         resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
         
-        int calculateOnionPrice = numberOfOnion*1000;
-        int calculateEggPrice = numberOfEgg*2000;
-        int calculateGreenOnion = numberOfGreenOnion*500;
-        int calculateApple = numberOfApple*2000;
+        int calculateOnionPrice = numberOfOnion*goodsMap.get("onion").getPrice();
+        int calculateEggPrice = numberOfEgg*goodsMap.get("egg").getPrice();
+        int calculateGreenOnion = numberOfGreenOnion*goodsMap.get("greenOnion").getPrice();
+        int calculateApple = numberOfApple*goodsMap.get("apple").getPrice();
         int result = calculateOnionPrice + calculateEggPrice + calculateGreenOnion + calculateApple;
 
         try(PrintWriter out = resp.getWriter()){
+            out.println("장바구니");
             out.println("양파 : " + numberOfOnion + "개 " + calculateOnionPrice + "원");
             out.println("계란 : " + numberOfEgg + "개 " + calculateEggPrice + "원");
             out.println("파 : " + numberOfGreenOnion + "개 " +calculateGreenOnion + "원");
