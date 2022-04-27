@@ -20,5 +20,6 @@ public class WebAppInitializer implements ServletContainerInitializer {
         servletContext.setInitParameter("egg","5,2000");
         servletContext.setInitParameter("greenOnion","10,500");
         servletContext.setInitParameter("apple","20,2000");
+        servletContext.setInitParameter("counter", "count.txt");
     }
 }

@@ -53,6 +53,11 @@ public class LoginServlet extends HttpServlet {
                     "\n" +
                     "</body>\n" +
                     "</html>");
+
+                String uri = (String)req.getAttribute("uri");
+                if (Objects.nonNull(uri)) {
+                    resp.sendRedirect(uri);
+                }
             }
         }
     }
@@ -69,10 +74,10 @@ public class LoginServlet extends HttpServlet {
                 session.invalidate();
             }
             session = req.getSession();
+
             session.setAttribute("id", id);
 
-
-            resp.sendRedirect(req.getRequestURI());
+            resp.sendRedirect("/login");
 
         }else{
             resp.sendRedirect("/loginFail.html");

@@ -5,6 +5,7 @@ import static java.lang.Thread.sleep;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,11 @@ public class FoodStand extends HttpServlet {
         throws ServletException, IOException {
         resp.setContentType("text/plain");
 
+        RequestDispatcher rd =req.getRequestDispatcher("/init");
+        rd.include(req,resp);
+
         Map<String, Goods> goodsMap;
+
         goodsMap = (Map<String, Goods>) getServletContext().getAttribute("goodsList");
 
         try(PrintWriter out = resp.getWriter()) {

@@ -18,10 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*", initParams = {
-@WebInitParam(name = "whitelist", value = "/login," + "/logout," +"/loginForm.html")
+@WebInitParam(name = "whitelist", value = "/login," + "/logout," +"/loginForm.html,"+"/index.html,"+"/")
 })
 public class LoginCheckFilter implements Filter {
     List<String> urls = new ArrayList<>();
+    String uri;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,15 +36,15 @@ public class LoginCheckFilter implements Filter {
         String requestURI = ((HttpServletRequest)servletRequest).getRequestURI();
         if(!urls.contains(requestURI)){
             HttpSession session = ((HttpServletRequest)servletRequest).getSession(false);
+            uri = requestURI;
 
             if(Objects.isNull(session)){
                 RequestDispatcher rd = servletRequest.getRequestDispatcher("/loginForm.html");
                 rd.forward(servletRequest, servletResponse);
-
-
         }
 
         }
+        servletRequest.setAttribute("uri", uri);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

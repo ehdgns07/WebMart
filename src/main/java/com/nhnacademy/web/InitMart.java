@@ -43,14 +43,6 @@ public class InitMart extends HttpServlet {
         goodsMap.put("apple", apple);
 
         getServletContext().setAttribute("goodsList", goodsMap);
-
-        resp.sendRedirect("/init.html");
-
-        try (PrintWriter out = resp.getWriter()) {
-            out.println(getServletContext().getAttribute("goodsList").toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }
